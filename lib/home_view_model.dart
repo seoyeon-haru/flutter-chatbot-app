@@ -19,7 +19,7 @@ class HomeViewModel extends Notifier<List<Chat>> {
 
 // Gemini SDK 이용할 준비
   final _model = GenerativeModel(
-    model: 'gemini-1.5-flase',
+    model: 'gemini-1.5-flash',
     apiKey: const String.fromEnvironment('GEMINI_API_KEY'),
   );
 
