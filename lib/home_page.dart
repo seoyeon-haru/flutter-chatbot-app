@@ -1,3 +1,4 @@
+import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_chatbot_app/chat_list_item.dart';
 import 'package:flutter_chatbot_app/home_view_model.dart';
@@ -53,6 +54,15 @@ class _HomePageState extends ConsumerState<HomePage> {
                 TextField(
                   controller: textController,
                   onSubmitted: (value) {
+                    /// logEvent 앱이 복잡하면 모든 버튼, 페이지에 머무는 시간까지 기록을 함
+                    /// 필수는 아니지만 UX 디자이너와 협업할 때 수집된 정보 기반으로
+                    /// UX를 개선시키는 작업을 하게 되기 때문
+                    FirebaseAnalytics.instance.logEvent(
+                        name: 'HOME_PAGE_SEND_EVENT',
+
+                        /// parameters 에 나중에 이벤트 남길 때
+                        /// Firebase Analytics Console 에서 추가적인 데이터를 보여줄 수 있음
+                        parameters: {'content': value});
                     if (value.trim().isEmpty) {
                       return;
                     }
